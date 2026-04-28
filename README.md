@@ -30,15 +30,13 @@ Build script that compiles the source code using `nvcc` and links against the CU
 To run the full pipeline (download data, build, and process):
 
 ```bash
+cd CUDA_Project
 chmod +x run.sh
 ./run.sh
 ```
 
 Alternatively, you can run the steps manually:
 ```bash
-# Prepare dataset
-python3 setup_dataset.py
-
 # Build project
 make
 
