@@ -3,7 +3,8 @@
 echo "Starting CUDA Batch Image Processing Pipeline..."
 
 # 1. Prepare Dataset
-echo "Step 1: Downloading and preparing dataset..."
+echo "Step 1: Installing dependencies, downloading, and preparing dataset..."
+python3 -m pip install Pillow
 python3 setup_dataset.py
 
 # 2. Build the CUDA executable
