@@ -43,6 +43,10 @@ BIN_DIR = bin
 DATA_DIR = data
 LIB_DIR = lib
 
+# Define target and source files
+TARGET = $(BIN_DIR)/batchProcessNPP
+SRC = $(SRC_DIR)/batchProcessNPP.cu
+
 # Define the default rule
 all: $(TARGET)
 

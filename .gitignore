@@ -4,3 +4,11 @@
 *.ptx
 *.cubin
 *.fatbin
+
+# Dataset and generated files
+misc.zip
+data/input/
+data/output/
+data/misc/
+__pycache__/
+bin/

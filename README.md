@@ -1,30 +1,50 @@
-# Example README.md file for Coursera Projects
+# CUDA at Scale for the Enterprise - Course Project
 
 ## Overview
+This project implements a high-performance batch image processing pipeline using NVIDIA Performance Primitives (NPP). It is designed to run efficiently on GPU hardware, reading hundreds of images, applying an RGB-to-Grayscale conversion using NPP (`nppiRGBToGray_8u_C3C1R`), and saving the results.
+
+This project uses the USC Viterbi SIPI Image Database (Misc Volume) as its dataset. 
 
 ## Code Organization
 
-```bin/```
-This folder should hold all binary/executable code that is built automatically or manually. Executable code should have use the .exe extension or programming language-specific extension.
+`bin/`
+This folder holds the compiled `batchProcessNPP` executable.
 
-```data/```
-This folder should hold all example data in any format. If the original data is rather large or can be brought in via scripts, this can be left blank in the respository, so that it doesn't require major downloads when all that is desired is the code/structure.
+`data/`
+Contains the dataset. `data/input` stores the raw downloaded PNG images, and `data/output` stores the processed grayscale images.
 
-```lib/```
-Any libraries that are not installed via the Operating System-specific package manager should be placed here, so that it is easier for inclusion/linking.
+`include/`
+Contains standard lightweight image I/O headers (`stb_image.h` and `stb_image_write.h`) to read and write images without requiring complex external library installations (like FreeImage or libtiff) which might be unavailable or complex to set up in the Coursera Lab environment.
 
-```src/```
-The source code should be placed here in a hierarchical fashion, as appropriate.
+`src/`
+Contains the source code (`batchProcessNPP.cu`).
 
-```README.md```
-This file should hold the description of the project so that anyone cloning or deciding if they want to clone this repository can understand its purpose to help with their decision.
+`setup_dataset.py`
+A Python script that automatically downloads the USC Viterbi SIPI Image dataset (`misc.zip`), extracts it, and converts the TIFF files to standard PNG formats inside the `data/input` directory.
 
-```INSTALL```
-This file should hold the human-readable set of instructions for installing the code so that it can be executed. If possible it should be organized around different operating systems, so that it can be done by as many people as possible with different constraints.
+`run.sh`
+The primary execution script. It automatically prepares the dataset, compiles the CUDA program, and runs the batch processing.
 
-```Makefile or CMAkeLists.txt or build.sh```
-There should be some rudimentary scripts for building your project's code in an automatic fashion.
+`Makefile`
+Build script that compiles the source code using `nvcc` and links against the CUDA and NPP libraries.
 
-```run.sh```
-An optional script used to run your executable code, either with or without command-line arguments.
+## Execution in Coursera Lab
 
+To run the full pipeline (download data, build, and process):
+
+```bash
+chmod +x run.sh
+./run.sh
+```
+
+Alternatively, you can run the steps manually:
+```bash
+# Prepare dataset
+python3 setup_dataset.py
+
+# Build project
+make
+
+# Execute batch processing
+./bin/batchProcessNPP data/input data/output
+```
