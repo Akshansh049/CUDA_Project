@@ -19,9 +19,6 @@ Contains standard lightweight image I/O headers (`stb_image.h` and `stb_image_wr
 `src/`
 Contains the source code (`batchProcessNPP.cu`).
 
-`setup_dataset.py`
-A Python script that automatically downloads the USC Viterbi SIPI Image dataset (`misc.zip`), extracts it, and converts the TIFF files to standard PNG formats inside the `data/input` directory.
-
 `run.sh`
 The primary execution script. It automatically prepares the dataset, compiles the CUDA program, and runs the batch processing.
 
