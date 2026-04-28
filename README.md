@@ -30,6 +30,7 @@ Build script that compiles the source code using `nvcc` and links against the CU
 To download the project:
 ```bash
 git clone https://github.com/Akshansh049/CUDA_Project.git
+```
 
 To run the full pipeline (download data, build, and process):
 
