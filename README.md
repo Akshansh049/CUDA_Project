@@ -5,6 +5,24 @@ This project implements a high-performance batch image processing pipeline using
 
 This project uses the USC Viterbi SIPI Image Database (Misc Volume) as its dataset. 
 
+## Project Structure
+
+```text
+CUDA_Project/
+├── bin/                   # Compiled executables
+├── data/                  
+│   ├── input/             # Original dataset (39 PNGs)
+│   └── output/            # Processed grayscale images
+├── include/               
+│   ├── stb_image.h        # Image reading library
+│   └── stb_image_write.h  # Image writing library
+├── lib/                   # External libraries (if any)
+├── src/
+│   └── batchProcessNPP.cu # Main CUDA source code
+├── Makefile               # Build script
+└── run.sh                 # Pipeline execution script
+```
+
 ## Code Organization
 
 `bin/`
@@ -42,6 +60,7 @@ chmod +x run.sh
 
 Alternatively, you can run the steps manually:
 ```bash
+
 # Build project
 make
 
