@@ -4,8 +4,13 @@ import os
 import glob
 from PIL import Image
 
+def download_file(url, dest):
+    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
+    with urllib.request.urlopen(req) as response, open(dest, 'wb') as out_file:
+        out_file.write(response.read())
+
 def main():
-    url = 'http://sipi.usc.edu/database/misc.zip'
+    url = 'https://sipi.usc.edu/database/misc.zip'
     zip_path = 'misc.zip'
     extract_dir = 'data'
     input_dir = os.path.join('data', 'input')
@@ -15,7 +20,18 @@ def main():
 
     print("Downloading SIPI dataset...")
     if not os.path.exists(zip_path):
-        urllib.request.urlretrieve(url, zip_path)
+        try:
+            download_file(url, zip_path)
+        except Exception as e:
+            print(f"Failed to download from USC. Error: {e}")
+            print("Attempting to download a fallback dataset...")
+            # Fallback to a small generic image download if USC server blocks Coursera Lab
+            fallback_url = 'https://raw.githubusercontent.com/image-rs/image/master/tests/images/png/test.png'
+            req = urllib.request.Request(fallback_url, headers={'User-Agent': 'Mozilla/5.0'})
+            with urllib.request.urlopen(req) as response, open(os.path.join(input_dir, 'fallback_test.png'), 'wb') as out_file:
+                out_file.write(response.read())
+            print("Fallback dataset downloaded.")
+            return
     
     print("Extracting dataset...")
     with zipfile.ZipFile(zip_path, 'r') as zip_ref:
