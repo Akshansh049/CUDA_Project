@@ -1,4 +1,5 @@
 *.i
+*.i
 *.ii
 *.gpu
 *.ptx
@@ -7,7 +8,6 @@
 
 # Dataset and generated files
 misc.zip
-data/input/
 data/output/
 data/misc/
 __pycache__/
